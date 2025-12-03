@@ -26,10 +26,10 @@ export default function Book({ book }: Props) {
   return (
     <Link
       href={`/books/${isbn}`}
-      className="group/card relative aspect-[2/3] overflow-hidden transition-transform duration-300 hover:scale-105"
+      className="group/card relative aspect-2/3 overflow-hidden transition-transform duration-300 hover:scale-105"
     >
       <ImageWithFallback src={cover} alt={title} className="h-full w-full object-cover" />
-      <Card className="bg-card/85 hover:border-grey-600 absolute bottom-0 left-0 h-full w-full border-1 py-4 opacity-0 transition-all duration-200 group-hover/card:opacity-100">
+      <Card className="bg-card/85 hover:border-grey-600 absolute bottom-0 left-0 h-full w-full border py-4 opacity-0 transition-all duration-200 group-hover/card:opacity-100">
         <CardHeader className="px-4">
           <CardTitle className="leading-[-1.5]">{title}</CardTitle>
           <CardDescription>{author}</CardDescription>
