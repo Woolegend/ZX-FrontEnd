@@ -3,11 +3,14 @@
 import Blockquote from '@tiptap/extension-blockquote';
 import Document from '@tiptap/extension-document';
 import Heading from '@tiptap/extension-heading';
-import { BulletList, ListItem } from '@tiptap/extension-list';
+import HorizontalRule from '@tiptap/extension-horizontal-rule';
+import Image from '@tiptap/extension-image';
+import { BulletList, ListItem, OrderedList } from '@tiptap/extension-list';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
+import { Dropcursor, Gapcursor, Placeholder } from '@tiptap/extensions';
 import { useEditor, EditorContent } from '@tiptap/react';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 interface Props {
   content?: string;
@@ -26,7 +29,15 @@ export default function TextEditor({ content }: Props) {
       Heading.configure({ levels: [1, 2, 3] }),
       Blockquote,
       BulletList,
+      OrderedList,
       ListItem,
+      HorizontalRule,
+      Image,
+      Dropcursor,
+      Gapcursor,
+      Placeholder.configure({
+        placeholder: 'Write something …',
+      }),
     ],
     /** NOTE
      * Don't render immediately on the server
@@ -41,6 +52,14 @@ export default function TextEditor({ content }: Props) {
     //   forceUpdate((prev) => !prev);
     // },
   });
+
+  const addImage = useCallback(() => {
+    const url = window.prompt('URL');
+
+    if (editor && url) {
+      editor.chain().focus().setImage({ src: url }).run();
+    }
+  }, [editor]);
 
   if (!editor) return null;
 
@@ -74,10 +93,24 @@ export default function TextEditor({ content }: Props) {
           </button>
           <button
             onClick={() => editor.chain().focus().toggleBulletList().run()}
-            className={editor.isActive('bulletList') ? 'is-active' : ''}
+            className={editor.isActive('bulletList') ? styleActive : ''}
           >
             Toggle bullet list
           </button>
+          <button
+            onClick={() => editor.chain().focus().toggleOrderedList().run()}
+            className={editor.isActive('orderedList') ? styleActive : ''}
+          >
+            Toggle ordered list
+          </button>
+          <div className="button-group">
+            <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
+              Set horizontal rule
+            </button>
+          </div>
+          <div className="button-group">
+            <button onClick={addImage}>Set image</button>
+          </div>
         </div>
       </div>
       <EditorContent
