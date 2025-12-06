@@ -1,6 +1,14 @@
 'use client';
 
-import { BookOpen, ChevronRight, FileText, Home, Moon, Settings, Sun } from 'lucide-react';
+import {
+  BookOpen,
+  ChevronRight,
+  FileText,
+  Home,
+  Moon,
+  Settings,
+  Sun,
+} from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 
@@ -47,7 +55,10 @@ export default function AppSidebar() {
       <SidebarHeader>
         <Button variant="ghost" size="icon" onClick={toggleSidebar}>
           <ChevronRight
-            className={cn([open ? 'rotate-180' : '', 'transition-transform duration-300'])}
+            className={cn([
+              open ? 'rotate-180' : '',
+              'transition-transform duration-300',
+            ])}
           />
         </Button>
       </SidebarHeader>

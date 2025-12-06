@@ -15,7 +15,10 @@ export async function GET(request: Request) {
   const clientSecret = process.env.NAVER_API_CLIENT_SECRET;
 
   if (!clientId || !clientSecret) {
-    return NextResponse.json({ error: '서버 API 키 설정 오류' }, { status: 500 });
+    return NextResponse.json(
+      { error: '서버 API 키 설정 오류' },
+      { status: 500 },
+    );
   }
 
   // 3. 네이버 API 호출 (XML 요청)
@@ -60,7 +63,10 @@ export async function GET(request: Request) {
     const bookData = parsedData?.rss?.channel?.item;
 
     if (!bookData) {
-      return NextResponse.json({ message: '검색 결과가 없습니다.' }, { status: 404 });
+      return NextResponse.json(
+        { message: '검색 결과가 없습니다.' },
+        { status: 404 },
+      );
     }
 
     // 6. 깔끔해진 JSON 반환

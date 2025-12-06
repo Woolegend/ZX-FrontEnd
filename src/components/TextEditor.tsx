@@ -98,24 +98,36 @@ export default function TextEditor({ content }: Props) {
         <Button
           size="icon"
           variant="ghost"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-          className={editor.isActive('heading', { level: 1 }) ? styleActive : ''}
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 1 }).run()
+          }
+          className={
+            editor.isActive('heading', { level: 1 }) ? styleActive : ''
+          }
         >
           <Heading1 />
         </Button>
         <Button
           size="icon"
           variant="ghost"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className={editor.isActive('heading', { level: 2 }) ? styleActive : ''}
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 2 }).run()
+          }
+          className={
+            editor.isActive('heading', { level: 2 }) ? styleActive : ''
+          }
         >
           <Heading2 />
         </Button>
         <Button
           size="icon"
           variant="ghost"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-          className={editor.isActive('heading', { level: 3 }) ? styleActive : ''}
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 3 }).run()
+          }
+          className={
+            editor.isActive('heading', { level: 3 }) ? styleActive : ''
+          }
         >
           <Heading3 />
         </Button>

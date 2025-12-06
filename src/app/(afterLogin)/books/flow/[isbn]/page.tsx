@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button';
 import IdeaRecord from './components/IdeaRecord';
 import ReadingTimer from './components/ReadingTimer';
 
-
 export default function BookFlowPage() {
   const { isbn } = useParams<{ isbn: string }>();
   const [isStop, setIsStop] = useState(false);

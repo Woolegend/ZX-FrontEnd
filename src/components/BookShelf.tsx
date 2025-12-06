@@ -61,15 +61,25 @@ export default function BookShelf() {
                   boxShadow: '2px 0 4px rgba(0,0,0,0.3)',
                 }}
               >
-                <div className={'absolute top-3 right-[3px] left-[3px] h-[2px] bg-white/10'}></div>
                 <div
-                  className={'absolute right-[3px] bottom-6 left-[3px] h-[6px] bg-black/20'}
+                  className={
+                    'absolute top-3 right-[3px] left-[3px] h-[2px] bg-white/10'
+                  }
+                ></div>
+                <div
+                  className={
+                    'absolute right-[3px] bottom-6 left-[3px] h-[6px] bg-black/20'
+                  }
                 ></div>
 
                 {/* Book Title on Hover */}
                 <div className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 border border-zinc-300 bg-white px-3 py-2 text-xs whitespace-nowrap text-zinc-900 opacity-0 shadow-lg transition-opacity group-hover:opacity-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100">
                   <div className="font-mono">{book.title}</div>
-                  <div className={'mt-0.5 text-[10px] text-zinc-600 dark:text-zinc-500'}>
+                  <div
+                    className={
+                      'mt-0.5 text-[10px] text-zinc-600 dark:text-zinc-500'
+                    }
+                  >
                     {book.author}
                   </div>
                 </div>

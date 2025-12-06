@@ -39,7 +39,9 @@ export default function IdeaRecord() {
         <MessageSquare size={16} />
         <span>생각 기록</span>
       </Button>
-      {open && <div className="fixed top-0 left-0 z-20 h-dvh w-dvw bg-black/40" />}
+      {open && (
+        <div className="fixed top-0 left-0 z-20 h-dvh w-dvw bg-black/40" />
+      )}
       <div
         className={cn([
           'fixed top-0 right-0 z-30',

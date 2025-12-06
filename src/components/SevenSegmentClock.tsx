@@ -30,7 +30,14 @@ interface SegmentProps {
   inactiveColor?: string;
 }
 
-export function Segemnt({ size, gap, tickness, value, activeColor, inactiveColor }: SegmentProps) {
+export function Segemnt({
+  size,
+  gap,
+  tickness,
+  value,
+  activeColor,
+  inactiveColor,
+}: SegmentProps) {
   const s = size;
   const g = gap || s * 0.04;
   const t = tickness || s * 0.2;
@@ -97,7 +104,9 @@ export function Segemnt({ size, gap, tickness, value, activeColor, inactiveColor
           <path
             key={key}
             d={d}
-            fill={isActive ? activeColor || '#ff3333' : inactiveColor || '#331111'}
+            fill={
+              isActive ? activeColor || '#ff3333' : inactiveColor || '#331111'
+            }
             className="transition-colors duration-200"
           />
         );

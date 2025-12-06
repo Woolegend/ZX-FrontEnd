@@ -11,7 +11,10 @@ export async function GET(request: Request) {
   const ttbKey = process.env.ALADIN_API_TTBKEY;
 
   if (!ttbKey) {
-    return NextResponse.json({ error: '서버 내부 오류: TTBKey 누락' }, { status: 500 });
+    return NextResponse.json(
+      { error: '서버 내부 오류: TTBKey 누락' },
+      { status: 500 },
+    );
   }
 
   // 알라딘 API 설정

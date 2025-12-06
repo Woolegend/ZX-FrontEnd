@@ -3,7 +3,13 @@
 import { BookmarkIcon, Play } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+} from '@/components/ui/card';
 
 import ProgressCard from './ProgressCard';
 
@@ -35,10 +41,17 @@ export default function BookMark() {
             {author} · {genre}
           </div>
         </div>
-        <ProgressCard className="mb-6" description={`${read}/${page}`} value={progress} />
+        <ProgressCard
+          className="mb-6"
+          description={`${read}/${page}`}
+          value={progress}
+        />
       </CardContent>
       <CardFooter>
-        <Button variant="highlight" className="text-primary-foreground w-full py-6">
+        <Button
+          variant="highlight"
+          className="text-primary-foreground w-full py-6"
+        >
           <Play fill="currentColor" />
           <span>계속읽기</span>
         </Button>

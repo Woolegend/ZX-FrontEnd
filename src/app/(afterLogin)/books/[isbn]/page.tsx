@@ -50,7 +50,11 @@ export default async function BookPage({ params }: Props) {
           <div className="relative aspect-200/283 w-[280px]">
             <ImageWithFallback src={cover} alt={title} />
           </div>
-          <Button variant="secondary" className="flex items-center gap-4 p-6" asChild>
+          <Button
+            variant="secondary"
+            className="flex items-center gap-4 p-6"
+            asChild
+          >
             <Link href={book.link}>
               <ShoppingCart />
               <span>구매하기</span>

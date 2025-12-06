@@ -8,7 +8,14 @@ import { BookType } from '@/mock/user';
 import { ImageWithFallback } from './ImageWithFallback';
 import ProgressCard from './ProgressCard';
 import StarScore from './StarScore';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from './ui/card';
 
 interface Props {
   book: BookType;
@@ -29,7 +36,11 @@ export default function Book({ book }: Props) {
       href={`/books/${isbn}`}
       className="group/card relative aspect-2/3 overflow-hidden transition-transform duration-300 hover:scale-105"
     >
-      <ImageWithFallback src={cover} alt={title} className="h-full w-full object-cover" />
+      <ImageWithFallback
+        src={cover}
+        alt={title}
+        className="h-full w-full object-cover"
+      />
       <Card className="bg-card/85 hover:border-grey-600 absolute bottom-0 left-0 h-full w-full border py-4 opacity-0 transition-all duration-200 group-hover/card:opacity-100">
         <CardHeader className="px-4">
           <CardTitle className="leading-[-1.5]">{title}</CardTitle>
@@ -44,7 +55,9 @@ export default function Book({ book }: Props) {
             <StarScore value={rank} />
             <div className="flex items-center gap-1.5 border border-orange-500/20 bg-orange-500/10 px-2 py-1">
               <Users size={12} className="text-brand" />
-              <span className="text-label text-brand font-mono">{book.readPage}</span>
+              <span className="text-label text-brand font-mono">
+                {book.readPage}
+              </span>
             </div>
           </div>
         </CardFooter>
