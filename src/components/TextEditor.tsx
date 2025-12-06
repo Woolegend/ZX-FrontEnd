@@ -31,6 +31,7 @@ import {
 import { useCallback, useState } from 'react';
 
 import { Button } from './ui/button';
+import { useParams } from 'next/navigation';
 
 interface Props {
   content?: string;
@@ -39,6 +40,7 @@ interface Props {
 const styleActive = 'font-bold text-brand';
 
 export default function TextEditor({ content }: Props) {
+  const { isbn } = useParams<{ isbn: string }>();
   const [_, forceUpdate] = useState(false);
   const editor = useEditor({
     content,
@@ -89,6 +91,30 @@ export default function TextEditor({ content }: Props) {
       editor.chain().focus().setImage({ src: url }).run();
     }
   }, [editor]);
+
+  const saveRecord = async () => {
+    if (!editor) return;
+    const content = editor.getJSON();
+    console.log(content);
+    const url = '/api/books/report';
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          isbn,
+          content,
+        }),
+      });
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (!editor) return null;
 
@@ -200,15 +226,7 @@ export default function TextEditor({ content }: Props) {
       </div>
       <EditorContent editor={editor} />
       <div className="flex justify-end">
-        <Button
-          onClick={() => {
-            console.log(editor.getHTML());
-            console.log(editor.getJSON());
-            console.log(editor.getText());
-          }}
-        >
-          저장
-        </Button>
+        <Button onClick={saveRecord}>저장</Button>
       </div>
     </div>
   );
