@@ -33,6 +33,7 @@ export default async function BookReportPage({
 
   if (!data) return <div>데이터를 찾을 수 없습니다.</div>;
 
+  //TOTO - 임시 저장 기능 구현
   return (
     <div className="h-dvh w-full p-6">
       <Button variant="ghost" asChild>
@@ -41,7 +42,7 @@ export default async function BookReportPage({
           <span>나가기</span>
         </Link>
       </Button>
-      <TextEditor content={data[data.length - 1].content} />
+      <TextEditor content={data[data.length - 1]?.content || ''} />
     </div>
   );
 }
