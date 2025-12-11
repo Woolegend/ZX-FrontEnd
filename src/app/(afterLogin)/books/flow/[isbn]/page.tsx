@@ -7,8 +7,8 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 
-import IdeaRecord from './components/IdeaRecord';
-import ReadingTimer from './components/ReadingTimer';
+import IdeaRecord from './_components/IdeaRecord';
+import ReadingTimer from './_components/ReadingTimer';
 
 export default function BookFlowPage() {
   const { isbn } = useParams<{ isbn: string }>();
