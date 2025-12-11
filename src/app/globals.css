@@ -6,6 +6,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --breakpoint-mobile: 20rem;
+  --breakpoint-tablet: 40rem;
+  --breakpoint-laptop: 64rem;
+  --breakpoint-desktop: 80rem;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
