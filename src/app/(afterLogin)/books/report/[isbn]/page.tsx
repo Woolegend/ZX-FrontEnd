@@ -112,6 +112,7 @@ export default function BookReportPage() {
     <PageContainer
       as="main"
       className="h-fit min-h-dvh w-dvw overflow-scroll bg-zinc-900"
+      areaVisible={false}
     >
       {editor && (
         <>

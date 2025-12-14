@@ -65,7 +65,7 @@ const useTextEditor = ({ content = null }: Props): Return => {
     editorProps: {
       attributes: {
         class:
-          'prose prose-gray lg:prose-xl dark:prose-invert border-primary mx-auto w-[80vw] min-h-[80vh] max-w-[920px] bg-[#1e1e1e] p-6 text-zinc-100 shadow-xl shadow-black/50 focus:outline-none focus-visible:outline-none my-12',
+          'prose prose-gray lg:prose-xl dark:prose-invert min-h-[80vh] focus:outline-none focus-visible:outline-none',
       },
     },
   });

@@ -7,5 +7,15 @@ interface Props {
 }
 
 export default function TextEditorContent({ editor }: Props) {
-  return <EditorContent editor={editor} />;
+  return (
+    <div className="mx-auto my-12 w-[80vw] max-w-[920px] bg-[#1e1e1e] text-zinc-100 shadow-xl shadow-black/50">
+      <div className="flex min-h-[20vh] items-center justify-center">
+        <input
+          className="w-full text-center text-4xl focus-within:placeholder:text-black/0 focus-visible:outline-none"
+          placeholder="제목을 입력하세요"
+        />
+      </div>
+      <EditorContent editor={editor} className="px-12" />
+    </div>
+  );
 }
