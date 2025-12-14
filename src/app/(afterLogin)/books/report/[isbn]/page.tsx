@@ -10,14 +10,14 @@ import { useEffect, useState } from 'react';
 import Toolbar from '@/app/(afterLogin)/books/report/[isbn]/_components/TextEditorToolbar';
 import PageContainer from '@/components/PageContainer';
 import { Button } from '@/components/ui/button';
-
-import TextEditorContent from './_components/TextEditorContent';
-import useTextEditor from './_components/useTextEditor';
 import {
   getBookReport,
   postBookReport,
   updateBookReport,
 } from '@/services/report.api';
+
+import TextEditorContent from './_components/TextEditorContent';
+import useTextEditor from './_components/useTextEditor';
 
 type DateType = {
   _id: ObjectId;

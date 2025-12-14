@@ -1,5 +1,14 @@
 import { Content } from '@tiptap/react';
 
+//TODO - isbn 검증 함수 구현
+//TODO - 에러 핸들링 구체화
+//TODO - 유저 인증 로직 구현
+//TODO - 베이스 URL 환경변수화
+//TODO - fetch 공통화
+//TODO - 타입 정의 공통화
+//TODO - 응답 타입 정의
+//TODO - 예외 처리 구체화
+
 export async function getBookReport({ isbn }: { isbn: string }) {
   try {
     const response = await fetch(`/api/books/report?query=${isbn}`, {
