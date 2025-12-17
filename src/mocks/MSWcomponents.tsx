@@ -1,7 +1,8 @@
 'use client';
 
-import { handlers } from '@/mocks/handlers';
 import { Suspense, use } from 'react';
+
+import { handlers } from '@/mocks/handlers';
 
 const mockingEnabledPromise =
   // client-side MSW 설정

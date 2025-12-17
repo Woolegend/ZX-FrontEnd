@@ -1,11 +1,11 @@
 import { ThemeProvider } from '@/components/theme-provider';
+import { MSWProvider } from '@/mocks/MSWcomponents';
 
 import type { Metadata } from 'next';
 
 import './globals.css';
-import { MSWProvider } from '@/mocks/MSWcomponents';
 
-// sercer-side MSW 설정
+// server-side MSW 설정
 if (
   process.env.NEXT_RUNTIME === 'nodejs' &&
   process.env.NEXT_ENV !== 'production'

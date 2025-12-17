@@ -1,10 +1,13 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import Form from 'next/form';
-import onSubmit from './_lib/onSubmit';
-import { useFormStatus } from 'react-dom';
 import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
+
+import { Button } from '@/components/ui/button';
+
+import onSubmit from './_lib/onSubmit';
+
 
 export default function SignupPage() {
   const [state, formAction] = useActionState(onSubmit, {

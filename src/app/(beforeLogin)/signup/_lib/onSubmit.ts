@@ -1,5 +1,7 @@
 'use server';
 
+import { signIn } from '@/auth';
+
 export default async function onSubmit(
   currentState: { message: string | null },
   formData: FormData,
@@ -42,6 +44,13 @@ export default async function onSubmit(
     if (response.status === 403) {
       return { message };
     }
+
+    await signIn('credentials', {
+      username: id,
+      password,
+      redirect: false,
+    });
+
     return { message: '회원가입에 성공했습니다.' };
   } catch (error) {
     console.error(error);

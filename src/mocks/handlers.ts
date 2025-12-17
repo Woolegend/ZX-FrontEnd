@@ -1,8 +1,12 @@
 import { http, HttpResponse } from 'msw';
-import profile from '@/../public/Skill_Portrait_CH0280.png';
 
 const User = [
-  { id: 'mikamoneru@google.com', nickname: '미카모 네루', image: profile },
+  {
+    id: 'mikamoneru@google.com',
+    nickname: '미카모 네루',
+    image:
+      'https://static.wikitide.net/bluearchivewiki/1/16/Neru_%28School_Uniform%29.png?version=dc7cf967e390853df68c8a7c59eb9ec5',
+  },
 ];
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;

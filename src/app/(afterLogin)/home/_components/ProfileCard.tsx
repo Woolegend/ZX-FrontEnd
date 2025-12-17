@@ -1,42 +1,30 @@
-import Image from 'next/image';
-
 import profileImage from '@/../public/default-profile.png';
 
+import { auth } from '@/auth';
 import { ImageWithFallback } from '@/components/ImageWithFallback';
+import LogoutButton from '@/components/LogoutButton';
 import { cn } from '@/lib/utils';
 
+export default async function ProfileCard() {
+  const session = await auth();
 
-const data = {
-  userName: '독서가',
-  userDescription: '안녕하세요! 책 읽는 것을 좋아하는 독서가입니다.',
-  userProfileImage: '#',
-};
-
-export default function ProfileCard() {
   return (
     <div className="bg-card p-8 shadow-md">
       <div className={cn(['flex', 'gap-4'])}>
         <div className="relative size-28">
-          {profileImage ? (
-            <Image
-              fill
-              src={profileImage.src}
-              alt="Default Profile"
-              className="bg-cover object-cover"
-            />
-          ) : (
-            <ImageWithFallback
-              src={data.userProfileImage}
-              alt={data.userName}
-            />
-          )}
+          <ImageWithFallback
+            src={session?.user?.image || profileImage.src}
+            alt={session?.user?.name || 'user profile cover'}
+          />
         </div>
         <div className="flex flex-col gap-2">
-          <div className="text-3xl">{data.userName}</div>
-          <div className="text-sm">{data.userDescription}</div>
+          <div className="text-3xl">{session?.user?.name || ''}</div>
+          <div className="text-sm">{session?.user?.email || ''}</div>
         </div>
       </div>
-      <div></div>
+      <div className="flex justify-end">
+        <LogoutButton />
+      </div>
     </div>
   );
 }

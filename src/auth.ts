@@ -10,6 +10,7 @@ export const {
     signIn: '/login',
     newUser: '/signup',
   },
+
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
@@ -32,7 +33,6 @@ export const {
         }
 
         const user = await response.json();
-        // console.log('user', user);
         return {
           email: user.id,
           name: user.nickname,

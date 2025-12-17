@@ -1,9 +1,10 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
 
 export default function LoginPage() {
   const [message, setMessage] = useState('');
@@ -14,15 +15,13 @@ export default function LoginPage() {
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     try {
-      const result = await signIn('credentials', {
+      await signIn('credentials', {
         username: id,
         password,
         redirect: false,
       });
-      console.log(result);
       router.push('/home');
     } catch (error) {
-      console.error(error);
       setMessage('로그인에 실패했습니다.');
     }
   };

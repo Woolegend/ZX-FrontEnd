@@ -1,7 +1,13 @@
+import { SessionProvider } from 'next-auth/react';
+
 import SidebarLayout from '@/layouts/SidebarLayout';
 
-export default function Layout({
+export default async function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return <SidebarLayout>{children}</SidebarLayout>;
+  return (
+    <SessionProvider>
+      <SidebarLayout>{children}</SidebarLayout>
+    </SessionProvider>
+  );
 }
