@@ -2,12 +2,12 @@ import { BookLookUpResponse } from '@/types/aladin.type';
 
 const key = process.env.ALADIN_API_TTBKEY;
 
-const fetchBookLookUpProxy = async (
+const fetchBookDetailProxy = async (
   isbn: string,
 ): Promise<BookLookUpResponse | undefined> => {
   try {
     const res = await fetch(
-      `/api/search/book/aladin?query=${encodeURIComponent(isbn)}`,
+      `/api/open/book/aladin/detail?query=${encodeURIComponent(isbn)}`,
     );
 
     if (!res.ok) throw new Error('검색 실패');
@@ -21,7 +21,7 @@ const fetchBookLookUpProxy = async (
 };
 
 //NOTE - Use Only Server Components
-const fetchBookLookUp = async (
+const fetchBookDetail = async (
   isbn: string,
 ): Promise<BookLookUpResponse | undefined> => {
   if (!key) throw new Error('ttfkey is not defined');
@@ -54,4 +54,4 @@ const fetchBookLookUp = async (
   }
 };
 
-export { fetchBookLookUpProxy, fetchBookLookUp };
+export { fetchBookDetailProxy, fetchBookDetail };

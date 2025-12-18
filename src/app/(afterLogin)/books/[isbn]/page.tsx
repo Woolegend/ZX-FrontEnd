@@ -7,8 +7,8 @@ import { ImageWithFallback } from '@/components/ImageWithFallback';
 import StarScore from '@/components/StarScore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { fetchBookLookUp } from '@/lib/aladin.api';
 import { BookLookUpResponse } from '@/types/aladin.type';
+import { fetchBookDetail } from '@/lib/aladin.api';
 
 interface Props {
   params: Promise<{ isbn: string }>;
@@ -19,7 +19,7 @@ export default async function BookPage({ params }: Props) {
 
   let book = null;
   try {
-    const result = await fetchBookLookUp(isbn);
+    const result = await fetchBookDetail(isbn);
     book = (Array.isArray(result) ? result[0] : result) as BookLookUpResponse;
     console.log(book);
   } catch (error) {

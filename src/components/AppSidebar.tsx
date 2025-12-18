@@ -3,11 +3,11 @@
 import {
   BookOpen,
   ChevronRight,
-  FileText,
   Home,
   Moon,
   Settings,
   Sun,
+  ThumbsUp,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
@@ -38,7 +38,7 @@ const items = [
     url: '/library',
     icon: BookOpen,
   },
-  { title: '독후감', url: '/book/write', icon: FileText },
+  { title: '추천', url: '/recommend', icon: ThumbsUp },
 ];
 
 export default function AppSidebar() {
