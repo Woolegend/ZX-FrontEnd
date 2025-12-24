@@ -27,7 +27,7 @@ export const handlers = [
       },
     });
   }),
-  http.post(`${baseUrl}/api/signup`, async ({ request }) => {
+  http.post(`${baseUrl}/api/signup`, async () => {
     // return HttpResponse.text(JSON.stringify('user_exists'), {
     //   status: 403,
     // });

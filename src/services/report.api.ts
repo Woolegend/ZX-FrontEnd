@@ -1,5 +1,4 @@
 import { Content } from '@tiptap/react';
-import { ObjectId } from 'mongodb';
 
 //TODO - isbn 검증 함수 구현
 //TODO - 에러 핸들링 구체화
