@@ -1,10 +1,10 @@
-
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
+import { ObjectId } from 'mongodb';
 import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
 
 import { authConfig } from './auth.config';
-import { clientPromise } from './lib/mongodb';
+import { clientPromise, getCollection } from './lib/mongodb';
 
 /**
  * Google only provides Refresh Token
@@ -45,19 +45,36 @@ export const {
       },
     }),
   ],
+  events: {
+    async createUser({ user }) {
+      const collection = await getCollection('users');
+      collection.updateOne(
+        {
+          _id: new ObjectId(user.id),
+        },
+        {
+          $set: {
+            createdAt: new Date(),
+          },
+        },
+      );
+    },
+  },
   callbacks: {
-    // 1. JWT 생성 및 갱신 시 실행
+    // JWT 생성 및 갱신 시 실행
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id; // User ID를 토큰에 저장
+        token.createdAt = user.createdAt;
       }
       return token;
     },
 
-    // 2. 클라이언트에서 세션 조회(useSession) 시 실행
+    // 클라이언트에서 세션 조회(useSession) 시 실행
     async session({ session, token }) {
       if (token && session.user) {
         session.user.id = token.id as string;
+        session.user.createdAt = token.createdAt as Date;
       }
       return session;
     },

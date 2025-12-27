@@ -7,7 +7,10 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    remotePatterns: [new URL('https://image.aladin.co.kr/product/**')],
+    remotePatterns: [
+      new URL('https://image.aladin.co.kr/product/**'),
+      new URL('https://lh3.googleusercontent.com/a/**'),
+    ],
   },
 };
 

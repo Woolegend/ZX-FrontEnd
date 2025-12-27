@@ -15,6 +15,7 @@ import { useTheme } from 'next-themes';
 
 import { cn } from '@/lib/utils';
 
+import LogoutButton from './LogoutButton';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import {
@@ -97,6 +98,7 @@ export default function AppSidebar() {
                 <span>설정</span>
               </Link>
             </SidebarMenuButton>
+            <LogoutButton />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
