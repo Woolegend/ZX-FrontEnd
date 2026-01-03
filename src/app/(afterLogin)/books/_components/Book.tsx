@@ -14,16 +14,14 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { BookType } from '@/mocks/user';
+import { BookSearchResponse } from '@/types/aladin.type';
 
 interface Props {
-  book: BookType;
+  book: BookSearchResponse;
 }
 
 export default function Book({ book }: Props) {
-  const { title, author, isbn, page, readPage, cover, rank } = book;
-
-  const progress = Math.round((readPage / page) * 10000) / 100;
+  const { title, author, isbn13: isbn, cover, customerReviewRank } = book;
 
   // const handleSearch = async () => {
   //   if (!isbn) return;
@@ -47,16 +45,15 @@ export default function Book({ book }: Props) {
         </CardHeader>
         <CardContent className="flex grow flex-col justify-between gap-4 px-4 py-6">
           {/* <span className="text-sm underline text-zinc-400 underline-offset-4">{genre}</span> */}
-          <ProgressCard description="진행률" value={progress} />
         </CardContent>
         <CardFooter className="px-4">
           <div className="flex w-full items-center justify-between">
-            <StarScore value={rank} />
+            <div className="flex items-center gap-2">
+              <StarScore value={customerReviewRank} />
+              <span>{customerReviewRank}</span>
+            </div>
             <div className="flex items-center gap-1.5 border border-orange-500/20 bg-orange-500/10 px-2 py-1">
               <Users size={12} className="text-brand" />
-              <span className="text-label text-brand font-mono">
-                {book.readPage}
-              </span>
             </div>
           </div>
         </CardFooter>

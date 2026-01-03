@@ -12,7 +12,7 @@ export default function LibraryPage() {
 
   if (!query || query.length < 2) return null;
 
-  const {} = useQuery({
+  const { data } = useQuery({
     queryKey: ['books', query],
     queryFn: async () => fetchBookSearchProxy({ query }),
     staleTime: 5 * 60 * 1000,
@@ -24,7 +24,7 @@ export default function LibraryPage() {
       <div className="flex justify-center pb-5">
         <SearchField placeholder="책 제목, 저자, 장르를 입력해주세요..." />
       </div>
-      <BookContainer />
+      {data && <BookContainer books={data} />}
     </main>
   );
 }

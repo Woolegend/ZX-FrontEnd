@@ -1,5 +1,8 @@
-import { BookListResponse } from '@/mocks/mockBookList';
-import { BookLookUpResponse } from '@/types/aladin.type';
+import {
+  BookListResponse,
+  BookLookUpResponse,
+  BookSearchResponse,
+} from '@/types/aladin.type';
 
 const key = process.env.ALADIN_API_TTBKEY;
 
@@ -14,8 +17,8 @@ const fetchBookSearchProxy = async ({
   query,
   queryType = 'Keyword',
   start = 1,
-  maxResults = 10,
-}: FetchBookSearchProxyType) => {
+  maxResults = 12,
+}: FetchBookSearchProxyType): Promise<BookListResponse | undefined> => {
   if (!query) throw new Error('query is not defined');
 
   try {

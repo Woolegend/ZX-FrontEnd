@@ -27,6 +27,8 @@ export default function SearchField({ placeholder = '' }: Props) {
     router.push(`/books/search?keyword=${_keyword}`);
   };
 
+  //https://image.aladin.co.kr/product/31424/4/spineflip/k482832219_d.jpg
+
   return (
     <form
       className={cn([
