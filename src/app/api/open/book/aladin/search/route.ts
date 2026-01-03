@@ -40,6 +40,7 @@ export async function GET(request: Request) {
   try {
     // 서버에서 알라딘으로 요청 (CORS, 로컬 제한 우회)
     const response = await fetch(`${baseUrl}?${apiParams.toString()}`);
+    console.log(`${baseUrl}?${apiParams.toString()}`);
 
     if (!response.ok) {
       throw new Error(`알라딘 API 오류: ${response.status}`);

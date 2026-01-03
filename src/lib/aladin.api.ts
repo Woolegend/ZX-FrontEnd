@@ -3,26 +3,32 @@ import { BookLookUpResponse } from '@/types/aladin.type';
 
 const key = process.env.ALADIN_API_TTBKEY;
 
-type FetchBookSearchType = {
+type FetchBookSearchProxyType = {
   query: string;
   queryType?: 'Keyword' | 'Title' | 'Author' | 'Publisher';
   start?: number;
   maxResults?: number;
 };
 
-const fetchBookSearch = async ({
+const fetchBookSearchProxy = async ({
   query,
   queryType = 'Keyword',
   start = 1,
   maxResults = 10,
-}: FetchBookSearchType) => {
-  if (!key) throw new Error('ttfkey is not defined');
+}: FetchBookSearchProxyType) => {
   if (!query) throw new Error('query is not defined');
 
   try {
-    const response = await fetch(
-      `/api/open/book/aladin/search?query=${encodeURIComponent(query)}&queryType=${queryType}&start=${start}&maxResults=${maxResults}`,
-    );
+    const baseUrl = '/api/open/book/aladin/search';
+    const apiParams = new URLSearchParams({
+      query,
+      queryType,
+      start: start.toString(),
+      maxResults: maxResults.toString(),
+    });
+
+    const response = await fetch(`${baseUrl}?${apiParams.toString()}`);
+
     if (!response.ok) {
       throw new Error(`알라딘 API 오류: ${response.status}`);
     }
@@ -105,7 +111,7 @@ async function fetchBookListProxy() {
 }
 
 export {
-  fetchBookSearch,
+  fetchBookSearchProxy,
   fetchBookDetailProxy,
   fetchBookDetail,
   fetchBookListProxy,
