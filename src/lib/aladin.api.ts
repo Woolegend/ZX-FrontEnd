@@ -1,7 +1,46 @@
-import { BookListResponse } from '@/mocks/mockBookList';
-import { BookLookUpResponse } from '@/types/aladin.type';
+import {
+  BookListResponse,
+  BookLookUpResponse,
+  BookSearchResponse,
+} from '@/types/aladin.type';
 
 const key = process.env.ALADIN_API_TTBKEY;
+
+type FetchBookSearchProxyType = {
+  query: string;
+  queryType?: 'Keyword' | 'Title' | 'Author' | 'Publisher';
+  start?: number;
+  maxResults?: number;
+};
+
+const fetchBookSearchProxy = async ({
+  query,
+  queryType = 'Keyword',
+  start = 1,
+  maxResults = 12,
+}: FetchBookSearchProxyType): Promise<BookListResponse | undefined> => {
+  if (!query) throw new Error('query is not defined');
+
+  try {
+    const baseUrl = '/api/open/book/aladin/search';
+    const apiParams = new URLSearchParams({
+      query,
+      queryType,
+      start: start.toString(),
+      maxResults: maxResults.toString(),
+    });
+
+    const response = await fetch(`${baseUrl}?${apiParams.toString()}`);
+
+    if (!response.ok) {
+      throw new Error(`알라딘 API 오류: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const fetchBookDetailProxy = async (
   isbn: string,
@@ -75,6 +114,7 @@ async function fetchBookListProxy() {
 }
 
 export {
+  fetchBookSearchProxy,
   fetchBookDetailProxy,
   fetchBookDetail,
   fetchBookListProxy,

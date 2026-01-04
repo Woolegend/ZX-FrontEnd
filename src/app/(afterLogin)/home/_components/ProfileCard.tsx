@@ -1,13 +1,14 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { ArrowUpRight, AtSignIcon, Calendar } from 'lucide-react';
+import Image from 'next/image';
+
+import DefaultProfile from '@/../public/default-profile.png';
 
 import { auth } from '@/auth';
 import { Button } from '@/components/ui/button';
-import DefaultProfile from '@/../public/default-profile.png';
 
 import 'dayjs/locale/ko';
-import Image from 'next/image';
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime);
@@ -19,7 +20,7 @@ export default async function ProfileCard() {
   const profileImageSrc = user?.image || DefaultProfile.src;
 
   return (
-    <div className="bg-background-primary border-border-primary flex flex-col gap-2 rounded-xs border p-6">
+    <div className="bg-background-secondary border-border-primary flex flex-col gap-2 rounded-xs border p-6">
       {/* SECTION - header */}
       <div className="flex items-center justify-between">
         <span className="text-text-neutral-secondary text-xs leading-none">
