@@ -1,7 +1,7 @@
 import { userData } from '@/mocks/user';
+import { BookListResponse, BookSearchResponse } from '@/types/aladin.type';
 
 import Book from './Book';
-import { BookListResponse, BookSearchResponse } from '@/types/aladin.type';
 
 interface Props {
   books?: BookListResponse;

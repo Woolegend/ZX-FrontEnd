@@ -1,22 +1,24 @@
 'use client';
 
-import SearchField from '@/components/SearchField';
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'next/navigation';
+
+import SearchField from '@/components/SearchField';
 import { fetchBookSearchProxy } from '@/lib/aladin.api';
+
 import BookContainer from '../_components/BookContainer';
 
 export default function LibraryPage() {
   const searchParams = useSearchParams();
   const query = searchParams.get('keyword');
+  const isEnabledQuery = !!query && query.length > 1;
 
-  if (!query || query.length < 2) return null;
-
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['books', query],
-    queryFn: async () => fetchBookSearchProxy({ query }),
+    queryFn: async () => fetchBookSearchProxy({ query: query || '' }),
     staleTime: 5 * 60 * 1000,
     gcTime: 30 * 60 * 1000,
+    enabled: isEnabledQuery,
   });
 
   return (
@@ -24,7 +26,8 @@ export default function LibraryPage() {
       <div className="flex justify-center pb-5">
         <SearchField placeholder="책 제목, 저자, 장르를 입력해주세요..." />
       </div>
-      {data && <BookContainer books={data} />}
+      {isLoading && <div>로딩중...</div>}
+      {isEnabledQuery && !isLoading && data && <BookContainer books={data} />}
     </main>
   );
 }

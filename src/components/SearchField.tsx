@@ -1,9 +1,10 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { SearchIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { ChangeEventHandler, useState } from 'react';
+
+import { cn } from '@/lib/utils';
 
 interface Props {
   placeholder?: string;

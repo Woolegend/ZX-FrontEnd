@@ -1,8 +1,8 @@
 import BookMark from '@/components/BookMark';
 import PageContainer from '@/components/PageContainer';
+import SearchField from '@/components/SearchField';
 
 import ProfileCard from './_components/ProfileCard';
-import SearchField from '@/components/SearchField';
 
 export default function HomePage() {
   return (

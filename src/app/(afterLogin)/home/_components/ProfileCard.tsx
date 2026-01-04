@@ -1,13 +1,14 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { ArrowUpRight, AtSignIcon, Calendar } from 'lucide-react';
+import Image from 'next/image';
+
+import DefaultProfile from '@/../public/default-profile.png';
 
 import { auth } from '@/auth';
 import { Button } from '@/components/ui/button';
-import DefaultProfile from '@/../public/default-profile.png';
 
 import 'dayjs/locale/ko';
-import Image from 'next/image';
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime);

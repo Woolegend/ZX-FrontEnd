@@ -4,7 +4,6 @@ import { Users } from 'lucide-react';
 import Link from 'next/link';
 
 import { ImageWithFallback } from '@/components/ImageWithFallback';
-import ProgressCard from '@/components/ProgressCard';
 import StarScore from '@/components/StarScore';
 import {
   Card,
