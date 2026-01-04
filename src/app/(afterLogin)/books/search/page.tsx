@@ -24,7 +24,10 @@ export default function SearchBookPage() {
   return (
     <main className="m-auto w-[920px] p-4">
       <div className="flex justify-center pb-5">
-        <SearchField placeholder="책 제목, 저자, 장르를 입력해주세요..." />
+        <SearchField
+          defaultText={query}
+          placeholder="책 제목, 저자, 장르를 입력해주세요..."
+        />
       </div>
       {isLoading && <div>로딩중...</div>}
       {isEnabledQuery && !isLoading && data && <BookContainer books={data} />}

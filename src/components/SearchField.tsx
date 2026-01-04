@@ -7,12 +7,13 @@ import { ChangeEventHandler, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 interface Props {
+  defaultText?: string | null;
   placeholder?: string;
 }
 
-export default function SearchField({ placeholder = '' }: Props) {
+export default function SearchField({ defaultText, placeholder = '' }: Props) {
   const router = useRouter();
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState(defaultText ?? '');
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setKeyword(e.target.value);
