@@ -42,6 +42,7 @@
   --color-background-primary: var(--background-primary);
   --color-background-primary-hover: var(--background-primary-hover);
   --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary-hover: var(--background-tertiary-hover);
   --color-border-primary: var(--border-primary);
   --color-border-secondary: var(--border-secondary);
   --color-border-brand-tertiary: var(--border-brand-tertiary);
@@ -52,6 +53,7 @@
   --color-text-brand-tertiary: var(--text-brand-tertiary);
   --color-icon-primary: var(--icon-primary);
   --color-icon-neutral-primary: var(--icon-neutral-primary);
+  --color-icon-neutral-tertiary: var(--icon-neutral-tertiary);
   --color-icon-brand-secondary: var(--icon-brand-secondary);
 }
 
@@ -85,6 +87,7 @@
   --background-primary: oklch(0.235 0 0);
   --background-primary-hover: oklch(0.3407 0 0);
   --background-secondary: oklch(0.2931 0 0);
+  --background-tertiary-hover: oklch(0.3407 0 0);
   --border-primary: oklch(0.3867 0 0);
   --border-secondary: oklch(0.5624 0 0);
   --border-brand-tertiary: oklch(0.6392 0.1813 41.96);
@@ -95,6 +98,7 @@
   --text-brand-tertiary: oklch(0.6392 0.1813 41.96);
   --icon-primary: oklch(100% 0.00011 271.152);
   --icon-neutral-primary: oklch(0.9158 0 0);
+  --icon-neutral-tertiary: oklch(0.7636 0 0);
   --icon-brand-secondary: oklch(0.7163 0.1862 43.29);
 }
 
