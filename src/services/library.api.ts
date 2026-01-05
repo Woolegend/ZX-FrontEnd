@@ -1,5 +1,6 @@
-import { BookSearchResponse } from '@/types/aladin.type';
 import { ObjectId } from 'mongodb';
+
+import { BookSearchResponse } from '@/types/aladin.type';
 
 export type BookInLibraryType = {
   _id: ObjectId;
@@ -10,7 +11,6 @@ export type BookInLibraryType = {
   cover: string;
   itemPage: number;
   readPages: number;
-  customerReviewRank: number;
 };
 
 export type LibraryType = BookInLibraryType[];
@@ -29,7 +29,7 @@ export async function getLibrary(): Promise<LibraryType> {
 
 export async function postLibrary(book: BookSearchResponse) {
   try {
-    const response = await fetch('/api/books/librarys', {
+    const response = await fetch(`/api/books/librarys/${book.isbn13}`, {
       method: 'POST',
       cache: 'no-store',
       body: JSON.stringify({
@@ -39,8 +39,20 @@ export async function postLibrary(book: BookSearchResponse) {
         cover: book.cover,
         itemPage: book.subInfo.itemPage,
         readPages: 0,
-        customerReviewRank: book.customerReviewRank,
       }),
+    });
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    throw new Error('Failed to fetch book report');
+  }
+}
+
+export async function deleteLibrary(isbn13: string) {
+  try {
+    const response = await fetch(`/api/books/librarys/${isbn13}`, {
+      method: 'DELETE',
+      cache: 'no-store',
     });
     if (!response.ok) throw new Error('Network response was not ok');
     return await response.json();

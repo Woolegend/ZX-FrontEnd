@@ -1,7 +1,7 @@
+import { LibraryType } from '@/services/library.api';
 import { BookSearchResponse } from '@/types/aladin.type';
 
 import Book from './Book';
-import { LibraryType } from '@/services/library.api';
 
 interface Props {
   books?: BookSearchResponse[] | LibraryType;

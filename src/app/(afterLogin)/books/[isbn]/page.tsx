@@ -18,8 +18,8 @@ import StarScore from '@/components/StarScore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchBookDetailProxy } from '@/lib/aladin.api';
+import { deleteLibrary, getLibrary, postLibrary } from '@/services/library.api';
 import { BookListResponse, BookSearchResponse } from '@/types/aladin.type';
-import { getLibrary, postLibrary } from '@/services/library.api';
 
 export default function BookDetailPage() {
   const { isbn } = useParams();
@@ -61,8 +61,18 @@ export default function BookDetailPage() {
     queryFn: getLibrary,
   });
 
-  const { mutate } = useMutation({
+  const { mutate: mutatePostLibrary } = useMutation({
     mutationFn: postLibrary,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['library'] });
+    },
+  });
+
+  const { mutate: mutateDeleteLibrary } = useMutation({
+    mutationFn: deleteLibrary,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['library'] });
+    },
   });
 
   if (isBookLoading) return <div>로딩중...</div>;
@@ -105,13 +115,16 @@ export default function BookDetailPage() {
           {!isLibraryLoading && !isBookInLibrary ? (
             <Button
               className="flex items-center gap-4 p-6"
-              onClick={() => mutate(book)}
+              onClick={() => mutatePostLibrary(book)}
             >
               <PlusIcon size={16} />
               <span>서재에 추가하기</span>
             </Button>
           ) : (
-            <Button className="flex items-center gap-4 p-6">
+            <Button
+              className="flex items-center gap-4 p-6"
+              onClick={() => mutateDeleteLibrary(book.isbn13)}
+            >
               <XIcon size={16} />
               <span>서재에서 제거하기</span>
             </Button>

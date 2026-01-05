@@ -2,9 +2,9 @@
 
 import { Users } from 'lucide-react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 import { ImageWithFallback } from '@/components/ImageWithFallback';
-import StarScore from '@/components/StarScore';
 import {
   Card,
   CardContent,
@@ -13,9 +13,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { BookSearchResponse } from '@/types/aladin.type';
-import { useSearchParams } from 'next/navigation';
 import { BookInLibraryType } from '@/services/library.api';
+import { BookSearchResponse } from '@/types/aladin.type';
 
 interface Props {
   book: BookSearchResponse | BookInLibraryType;
@@ -25,7 +24,7 @@ export default function Book({ book }: Props) {
   const searchParams = useSearchParams();
   const keyword = searchParams.get('keyword');
 
-  const { isbn13: isbn, cover, customerReviewRank } = book;
+  const { isbn13: isbn, cover } = book;
 
   const title = book.title.split('-')[0].trim();
   const author = book.author.split(',')[0].replace('(지은이)', '').trim();
@@ -50,10 +49,6 @@ export default function Book({ book }: Props) {
         </CardContent>
         <CardFooter className="px-4">
           <div className="flex w-full items-center justify-between">
-            <div className="flex items-center gap-2">
-              <StarScore value={customerReviewRank} />
-              <span>{customerReviewRank}</span>
-            </div>
             <div className="flex items-center gap-1.5 border border-orange-500/20 bg-orange-500/10 px-2 py-1">
               <Users size={12} className="text-brand" />
             </div>
