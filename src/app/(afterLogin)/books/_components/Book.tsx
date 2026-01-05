@@ -15,9 +15,10 @@ import {
 } from '@/components/ui/card';
 import { BookSearchResponse } from '@/types/aladin.type';
 import { useSearchParams } from 'next/navigation';
+import { BookInLibraryType } from '@/services/library.api';
 
 interface Props {
-  book: BookSearchResponse;
+  book: BookSearchResponse | BookInLibraryType;
 }
 
 export default function Book({ book }: Props) {

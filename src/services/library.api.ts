@@ -1,19 +1,19 @@
-import { auth } from '@/auth';
 import { BookSearchResponse } from '@/types/aladin.type';
 import { ObjectId } from 'mongodb';
 
-type BookInLibraryType = {
+export type BookInLibraryType = {
   _id: ObjectId;
   userId: string;
   isbn13: string;
   title: string;
   author: string;
+  cover: string;
   itemPage: number;
   readPages: number;
   customerReviewRank: number;
 };
 
-type LibraryType = BookInLibraryType[];
+export type LibraryType = BookInLibraryType[];
 
 export async function getLibrary(): Promise<LibraryType> {
   try {
@@ -36,6 +36,7 @@ export async function postLibrary(book: BookSearchResponse) {
         isbn13: book.isbn13,
         title: book.title,
         author: book.author,
+        cover: book.cover,
         itemPage: book.subInfo.itemPage,
         readPages: 0,
         customerReviewRank: book.customerReviewRank,

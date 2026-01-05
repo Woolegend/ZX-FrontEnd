@@ -31,14 +31,22 @@ export async function POST(request: NextResponse) {
   }
 
   const body = await request.json();
-  const { isbn13, title, author, itemPage, readPages, customerReviewRank } =
-    body;
+  const {
+    isbn13,
+    title,
+    author,
+    cover,
+    itemPage,
+    readPages,
+    customerReviewRank,
+  } = body;
 
   const docBody = {
     userId,
     isbn13,
     title,
     author,
+    cover,
     itemPage,
     readPages,
     customerReviewRank,

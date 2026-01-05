@@ -30,7 +30,9 @@ export default function SearchBookPage() {
         />
       </div>
       {isLoading && <div>로딩중...</div>}
-      {isEnabledQuery && !isLoading && data && <BookContainer books={data} />}
+      {isEnabledQuery && !isLoading && data && (
+        <BookContainer books={data.item} />
+      )}
     </main>
   );
 }
