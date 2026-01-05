@@ -138,17 +138,21 @@ export default function BookDetailPage() {
             <div>{categorys[categorys.length - 1]}</div>
           </Suspense>
           <div className="flex gap-4">
-            <Button variant="highlight" className="grow p-6" asChild>
-              <Link href={`/books/flow/${book.isbn13}`}>
-                <BookOpenIcon />
-                <span>몰입모드</span>
-              </Link>
+            <Button
+              variant="highlight"
+              className="grow p-6"
+              onClick={() => router.push(`/books/flow/${book.isbn13}`)}
+            >
+              <BookOpenIcon />
+              <span>몰입모드</span>
             </Button>
-            <Button variant="secondary" className="grow p-6" asChild>
-              <Link href={`/books/report/${book.isbn13}`}>
-                <FileText />
-                <span>독후감</span>
-              </Link>
+            <Button
+              variant="secondary"
+              className="grow p-6"
+              onClick={() => router.push(`/books/report/${book.isbn13}`)}
+            >
+              <FileText />
+              <span>독후감</span>
             </Button>
           </div>
           <Card>

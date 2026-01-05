@@ -1,17 +1,16 @@
 'use client';
 
 import { Check, Pause, Play, X } from 'lucide-react';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 
 import IdeaRecord from './_components/IdeaRecord';
 import ReadingTimer from './_components/ReadingTimer';
+import { useRouter } from 'next/navigation';
 
 export default function BookFlowPage() {
-  const { isbn } = useParams<{ isbn: string }>();
+  const router = useRouter();
   const [isStop, setIsStop] = useState(false);
 
   const onClickStop = () => setIsStop((prev) => !prev);
@@ -23,11 +22,13 @@ export default function BookFlowPage() {
       <ReadingTimer isStop={isStop} />
       <div className="bg-primary-foreground fixed bottom-0 left-0 z-10 flex w-dvw justify-between p-4">
         <div className="flex gap-4">
-          <Button variant="secondary" asChild>
-            <Link href={`/books/${isbn}`} className="flex items-center gap-2">
-              <X size={16} />
-              <span>나가기</span>
-            </Link>
+          <Button
+            variant="secondary"
+            className="flex items-center gap-2"
+            onClick={() => router.back()}
+          >
+            <X size={16} />
+            <span>나가기</span>
           </Button>
           <Button variant="secondary" onClick={onClickStop}>
             {isStop ? (
