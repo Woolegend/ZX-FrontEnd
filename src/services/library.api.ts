@@ -15,9 +15,21 @@ export type BookInLibraryType = {
 
 export type LibraryType = BookInLibraryType[];
 
-export async function getLibrary(): Promise<LibraryType> {
+export async function getLibraryList(): Promise<LibraryType> {
   try {
     const response = await fetch('/api/books/librarys', {
+      cache: 'no-store',
+    });
+    if (!response.ok) throw new Error('Network response was not ok');
+    return await response.json();
+  } catch (error) {
+    throw new Error('Failed to fetch book report');
+  }
+}
+
+export async function getLibrary(isbn13: string): Promise<BookInLibraryType> {
+  try {
+    const response = await fetch(`/api/books/librarys/${isbn13}`, {
       cache: 'no-store',
     });
     if (!response.ok) throw new Error('Network response was not ok');

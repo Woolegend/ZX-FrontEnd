@@ -1,8 +1,3 @@
-/*
-# Aladin OpenAI manual
-https://docs.google.com/document/d/1mX-WxuoGs8Hy-QalhHcvuV17n50uGI2Sg_GHofgiePE/edit?tab=t.0#heading=h.wzyr9o7mof2u 
-*/
-
 type BookSearchResponse = {
   title: string;
   link: string;

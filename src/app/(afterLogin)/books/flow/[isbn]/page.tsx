@@ -1,13 +1,13 @@
 'use client';
 
 import { Check, Pause, Play, X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 
 import IdeaRecord from './_components/IdeaRecord';
 import ReadingTimer from './_components/ReadingTimer';
-import { useRouter } from 'next/navigation';
 
 export default function BookFlowPage() {
   const router = useRouter();

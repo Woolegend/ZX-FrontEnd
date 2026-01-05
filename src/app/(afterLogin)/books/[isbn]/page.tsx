@@ -18,13 +18,42 @@ import StarScore from '@/components/StarScore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { fetchBookDetailProxy } from '@/lib/aladin.api';
-import { deleteLibrary, getLibrary, postLibrary } from '@/services/library.api';
+import {
+  BookInLibraryType,
+  deleteLibrary,
+  getLibrary,
+  LibraryType,
+  postLibrary,
+} from '@/services/library.api';
 import { BookListResponse, BookSearchResponse } from '@/types/aladin.type';
 
 export default function BookDetailPage() {
   const { isbn } = useParams();
-  const router = useRouter();
   const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const { data: bookInLibrary, isLoading: isBookInLibraryLoading } =
+    useQuery<BookInLibraryType>({
+      queryKey: ['library', isbn],
+      queryFn: async () => getLibrary(isbn as string),
+      enabled: !!isbn,
+      staleTime: 5 * 60 * 1000,
+      initialData: () => {
+        if (typeof isbn !== 'string') return undefined;
+        const libraryQuery = queryClient.getQueryData<LibraryType>(['library']);
+
+        if (!libraryQuery) return undefined;
+        const foundBook = libraryQuery
+          ? libraryQuery.find((b) => b.isbn13 === isbn)
+          : null;
+        if (foundBook) return foundBook;
+
+        return undefined;
+      },
+      initialDataUpdatedAt: () => {
+        return queryClient.getQueryState(['library'])?.dataUpdatedAt;
+      },
+    });
 
   const { data: book, isLoading: isBookLoading } = useQuery<
     BookSearchResponse | undefined
@@ -56,11 +85,6 @@ export default function BookDetailPage() {
     enabled: !!isbn,
   });
 
-  const { data: library, isLoading: isLibraryLoading } = useQuery({
-    queryKey: ['library'],
-    queryFn: getLibrary,
-  });
-
   const { mutate: mutatePostLibrary } = useMutation({
     mutationFn: postLibrary,
     onSuccess: () => {
@@ -82,8 +106,6 @@ export default function BookDetailPage() {
   const author = book.author.split(',')[0].replace('(지은이)', '').trim();
   const categorys = book.categoryName.split('>') as string[];
   const cover = book.cover.replace('cover200', 'cover500');
-  const isBookInLibrary =
-    !!library && library.some((l) => l.isbn13 === book.isbn13);
 
   return (
     <main className="mx-auto w-[920px] p-4">
@@ -112,7 +134,7 @@ export default function BookDetailPage() {
               <span>구매하기</span>
             </Link>
           </Button>
-          {!isLibraryLoading && !isBookInLibrary ? (
+          {!isBookInLibraryLoading && !bookInLibrary ? (
             <Button
               className="flex items-center gap-4 p-6"
               onClick={() => mutatePostLibrary(book)}

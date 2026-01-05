@@ -3,14 +3,15 @@
 import { useQuery } from '@tanstack/react-query';
 
 import SearchField from '@/components/SearchField';
-import { getLibrary } from '@/services/library.api';
+import { getLibraryList } from '@/services/library.api';
 
 import BookContainer from './_components/BookContainer';
 
 export default function LibraryPage() {
   const { data } = useQuery({
     queryKey: ['library'],
-    queryFn: getLibrary,
+    queryFn: getLibraryList,
+    staleTime: 5 * 60 * 1000,
   });
 
   return (
