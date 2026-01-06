@@ -46,6 +46,7 @@
   --color-border-primary: var(--border-primary);
   --color-border-secondary: var(--border-secondary);
   --color-border-brand-tertiary: var(--border-brand-tertiary);
+  --color-border-utilities-swatch: var(--border-utilities-swatch);
   --color-text-tertiary: var(--text-tertiary);
   --color-text-neutral-primary: var(--text-neutral-primary);
   --color-text-neutral-secondary: var(--text-neutral-secondary);
@@ -91,6 +92,7 @@
   --border-primary: oklch(0.3867 0 0);
   --border-secondary: oklch(0.5624 0 0);
   --border-brand-tertiary: oklch(0.6392 0.1813 41.96);
+  --border-utilities-swatch: oklch(1 0 0 / 28%);
   --text-tertiary: oklch(0.7668 0 0);
   --text-neutral-primary: oklch(0.9158 0 0);
   --text-neutral-secondary: oklch(0.8483 0 0);
