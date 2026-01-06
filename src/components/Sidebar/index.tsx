@@ -22,6 +22,8 @@ import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
 import { useTheme } from 'next-themes';
 
+const HIDDEN_PATHS = ['/books/flow', '/books/report'];
+
 interface Props {
   children: React.ReactNode;
 }
@@ -46,6 +48,12 @@ export default function Sidebar({ children }: Props) {
   const onClickTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
+
+  const isHidden = HIDDEN_PATHS.some((path) => pathname?.startsWith(path));
+
+  if (isHidden) {
+    return <>{children}</>;
+  }
 
   return (
     <div className="flex">

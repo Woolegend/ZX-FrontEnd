@@ -2,19 +2,28 @@ import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { getCollection } from '@/lib/mongodb';
+import { auth } from '@/auth';
 
 //SECTION - 독후감(Report) 조회(GET)
 export async function GET(request: NextRequest) {
+  const session = await auth();
   const { searchParams } = request.nextUrl;
   const isbn = searchParams.get('isbn');
+
+  if (!session) {
+    return NextResponse.json(
+      { message: '로그인이 필요합니다.' },
+      { status: 401 },
+    );
+  }
 
   if (!isbn) {
     return NextResponse.json({ error: 'isbn이 없습니다.' }, { status: 400 });
   }
 
   try {
-    const collection = await getCollection('report');
-    const result = await collection.findOne({ isbn });
+    const collection = await getCollection('reports');
+    const result = await collection.findOne({ userId: session?.user.id, isbn });
     return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json(
@@ -27,11 +36,18 @@ export async function GET(request: NextRequest) {
 
 //SECTION - 독후감(Report) 생성(POST)
 export async function POST(request: NextRequest) {
+  const session = await auth();
   const body = await request.json();
   const { isbn, title, content } = body;
 
   //TODO - 유저 검증 로직
 
+  if (!session) {
+    return NextResponse.json(
+      { message: '로그인이 필요합니다.' },
+      { status: 401 },
+    );
+  }
   if (!isbn) {
     return NextResponse.json(
       { message: 'isbn이 누락되었습니다.' },
@@ -52,9 +68,10 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const collection = await getCollection('report');
+    const collection = await getCollection('reports');
     const now = new Date().toISOString();
     const newReport = {
+      userId: session?.user.id,
       isbn,
       title,
       content,
@@ -78,11 +95,18 @@ export async function POST(request: NextRequest) {
 
 //SECTION - 독후감(Report) 수정(UPDATE)
 export async function PATCH(request: NextRequest) {
+  const session = await auth();
   const body = await request.json();
   const { _id, title, content } = body;
 
   //TODO - 유저 검증 로직
 
+  if (!session) {
+    return NextResponse.json(
+      { message: '로그인이 필요합니다.' },
+      { status: 401 },
+    );
+  }
   if (!_id) {
     return NextResponse.json(
       { message: '저장할 독후감의 id가 누락되었습니다.' },
@@ -103,7 +127,7 @@ export async function PATCH(request: NextRequest) {
   }
 
   try {
-    const collection = await getCollection('report');
+    const collection = await getCollection('reports');
     const result = await collection.updateOne(
       { _id: new ObjectId(_id) },
       {

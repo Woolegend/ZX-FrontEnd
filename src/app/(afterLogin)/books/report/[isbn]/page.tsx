@@ -2,10 +2,9 @@
 
 import { Content } from '@tiptap/react';
 import { ArrowLeft, NotepadText, Save } from 'lucide-react';
-import { ObjectId } from 'mongodb';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Toolbar from '@/app/(afterLogin)/books/report/[isbn]/_components/TextEditorToolbar';
 import PageContainer from '@/components/PageContainer';
@@ -18,21 +17,31 @@ import {
 
 import TextEditorContent from './_components/TextEditorContent';
 import useTextEditor from './_components/useTextEditor';
+import { useQuery } from '@tanstack/react-query';
 
 type DateType = {
   _id: string;
+  userId: string;
   isbn: string;
+  title: string;
   content: Content;
   createdAt: string;
   updatedAt: string;
-} | null;
+};
 
 export default function BookReportPage() {
   const { isbn } = useParams() as { isbn?: string };
-  const [data, setData] = useState<DateType>(null);
-  const { editor } = useTextEditor({ content: data?.content || null });
-  const [isLoading, setIsLoading] = useState(true);
   const [title, setTitle] = useState('');
+  const { data, isLoading } = useQuery<DateType>({
+    queryKey: ['report', isbn],
+    queryFn: async () =>
+      getBookReport({ isbn } as { isbn: string }).then((res) => {
+        setTitle(res.title);
+        return res;
+      }),
+    enabled: !!isbn,
+  });
+  const { editor } = useTextEditor({ content: data?.content || null });
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     /**
@@ -53,10 +62,6 @@ export default function BookReportPage() {
 
     const content = editor.getJSON();
 
-    //TODO - 로딩 상태 관리
-    //TODO - 에러 핸들링
-    //TODO - 변경사항 없을 시 저장 방지
-
     try {
       if (data) {
         const body = { _id: data._id, title, content };
@@ -74,25 +79,6 @@ export default function BookReportPage() {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!isbn) return;
-      try {
-        setIsLoading(true);
-        const res = await getBookReport({ isbn: isbn as string });
-        if (res) {
-          setData({ _id: (res._id as ObjectId).toString(), ...res });
-          setTitle(res.title || '');
-        }
-      } catch (error) {
-        alert(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, [isbn]);
 
   if (isLoading) {
     return (
