@@ -1,7 +1,5 @@
 import { http, HttpResponse } from 'msw';
 
-import { mockBookList } from './mockBookList';
-
 const User = [
   {
     id: 'mikamoneru@google.com',
@@ -38,9 +36,8 @@ export const handlers = [
     });
   }),
   http.get(`${baseUrl}/api/open/book/aladin/list`, async ({ request }) => {
-    // return HttpResponse.text(JSON.stringify('user_exists'), {
-    //   status: 403,
-    // });
-    return HttpResponse.json(mockBookList);
+    return HttpResponse.text(JSON.stringify('user_exists'), {
+      status: 403,
+    });
   }),
 ];
