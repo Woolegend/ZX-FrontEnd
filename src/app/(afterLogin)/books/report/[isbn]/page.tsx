@@ -1,5 +1,6 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import { Content } from '@tiptap/react';
 import { ArrowLeft, NotepadText, Save } from 'lucide-react';
 import Link from 'next/link';
@@ -17,7 +18,6 @@ import {
 
 import TextEditorContent from './_components/TextEditorContent';
 import useTextEditor from './_components/useTextEditor';
-import { useQuery } from '@tanstack/react-query';
 
 type DateType = {
   _id: string;

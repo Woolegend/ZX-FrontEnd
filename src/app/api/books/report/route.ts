@@ -1,8 +1,8 @@
 import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getCollection } from '@/lib/mongodb';
 import { auth } from '@/auth';
+import { getCollection } from '@/lib/mongodb';
 
 //SECTION - 독후감(Report) 조회(GET)
 export async function GET(request: NextRequest) {

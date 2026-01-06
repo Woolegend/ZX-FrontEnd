@@ -12,6 +12,7 @@ import {
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import { useTheme } from 'next-themes';
 
 import DefaultProfile from '@/../public/default-profile.png';
 
@@ -20,7 +21,6 @@ import { useSidebarStore } from '@/stores/useSidebarStore';
 
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
-import { useTheme } from 'next-themes';
 
 const HIDDEN_PATHS = ['/books/flow', '/books/report'];
 
